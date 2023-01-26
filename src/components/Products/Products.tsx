@@ -2,10 +2,13 @@ import {observer} from "mobx-react";
 import productsState from '../../Mobix/dataStore';
 import styles from './Products.module.scss';
 import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 const Products = () => {
     const {products} = productsState;
+    const navigate = useNavigate();
+
 
     useEffect(()=>{
         productsState.setProducts();
@@ -17,7 +20,7 @@ const Products = () => {
                 products.map(p => {
                     return (
                         <div className={styles.product} key={p.id}>
-                            <p>{p.title}</p>
+                            <p onClick={()=> navigate(`/${p.id}`)}>{p.title}</p>
                             <img src={p.image} alt="img"/>
                             <button>Buy</button>
                         </div>

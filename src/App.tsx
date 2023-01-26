@@ -1,11 +1,16 @@
 import styles from './App.module.scss'
 import Products from "./components/Products/Products";
+import {Route, Routes} from "react-router-dom";
+import SingleProduct from "./components/SingleProduct/SingleProduct";
 
 function App() {
 
     return (
         <div className={styles.App}>
-            <Products/>
+            <Routes>
+                <Route path="/" element={<Products/>}/>
+                <Route path="/:id" element={<SingleProduct/>}/>
+            </Routes>
         </div>
     )
 }
