@@ -1,20 +1,13 @@
-import './App.css'
-import {observer} from "mobx-react";
-import {useEffect} from "react";
-import productsState from '../src/Mobix/dataStore';
+import styles from './App.module.scss'
+import Products from "./components/Products/Products";
 
 function App() {
-  const {products} = productsState;
 
-  useEffect(()=>{
-    productsState.setProducts();
-  },[])
-
-  return (
-    <div className="App">
-      {products.map(p=> <p key={p.id}>{p.title}</p>)}
-    </div>
-  )
+    return (
+        <div className={styles.App}>
+            <Products/>
+        </div>
+    )
 }
 
-export default observer(App);
+export default App;
