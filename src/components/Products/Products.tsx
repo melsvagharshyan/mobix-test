@@ -1,5 +1,5 @@
 import {observer} from "mobx-react";
-import productsState from '../../Mobix/dataStore';
+import productsState from '../../stores/dataStore';
 import styles from './Products.module.scss';
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
@@ -10,7 +10,7 @@ const Products = () => {
     const navigate = useNavigate();
 
 
-    useEffect(()=>{
+    useEffect(() => {
         productsState.setProducts();
     })
 
@@ -20,15 +20,17 @@ const Products = () => {
                 products.map(p => {
                     return (
                         <div className={styles.product} key={p.id}>
-                            <p onClick={()=> navigate(`/${p.id}`)}>{p.title}</p>
+                            <p>{p.title}</p>
                             <img src={p.image} alt="img"/>
-                            <button>Buy</button>
+                            <button onClick={() => navigate(`/${p.id}`)}>
+                                Buy
+                            </button>
                         </div>
                     )
                 })
             }
         </div>
-    );
+    )
 };
 
 export default observer(Products);

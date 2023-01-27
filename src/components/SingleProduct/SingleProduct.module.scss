@@ -1,0 +1,19 @@
+.single {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  max-height: 400px;
+  box-shadow: silver 0 0 5px 0;
+  border-radius: 3px;
+  img {
+    max-width: 50%;
+  }
+}

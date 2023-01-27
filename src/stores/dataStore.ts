@@ -1,6 +1,7 @@
-import {makeObservable} from "mobx";
-import {fetchProducts, fetchSingleProduct} from "../utils/api/api";
+import { makeAutoObservable} from "mobx";
+import {fetchProducts, fetchSingleProduct, postProduct} from "../utils/api/api";
 import {IProduct} from "../utils/types/types";
+import {IProductForm} from "../components/AddProduct";
 
 async function getProducts(): Promise<Array<IProduct>> {
     const {data} = await fetchProducts();
@@ -12,17 +13,20 @@ async function getSingleProduct(id: string | undefined): Promise<IProduct> {
     return data;
 }
 
+async function addProduct(formData: IProductForm) {
+    await postProduct(formData);
+}
+
 
 class DataStore {
     products: Array<IProduct> = [];
-    singleProduct: IProduct | null = null
+    singleProduct: IProduct | null = null;
+
 
     constructor() {
-        makeObservable(this, {
-            products: true,
-            singleProduct: true
-        })
+        makeAutoObservable(this);
     }
+
 
     async setProducts(): Promise<void> {
         this.products = await getProducts();
@@ -30,6 +34,12 @@ class DataStore {
 
     async setSingleProduct(id: string | undefined): Promise<void> {
         this.singleProduct = await getSingleProduct(id)
+    }
+
+    async postNewProduct({formData, navigate}: {formData: IProductForm, navigate: Function}) {
+        await addProduct(formData);
+        await this.setProducts();
+        navigate("/")
     }
 
 }
