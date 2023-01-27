@@ -1,4 +1,4 @@
-import { makeAutoObservable} from "mobx";
+import {makeAutoObservable} from "mobx";
 import {fetchProducts, fetchSingleProduct, postProduct} from "../utils/api/api";
 import {IProduct} from "../utils/types/types";
 import {IProductForm} from "../components/AddProduct";
@@ -36,7 +36,7 @@ class DataStore {
         this.singleProduct = await getSingleProduct(id)
     }
 
-    async postNewProduct({formData, navigate}: {formData: IProductForm, navigate: Function}) {
+    async postNewProduct({formData, navigate}: { formData: IProductForm, navigate: Function }) {
         await addProduct(formData);
         await this.setProducts();
         navigate('/')
