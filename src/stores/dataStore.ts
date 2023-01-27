@@ -39,7 +39,7 @@ class DataStore {
     async postNewProduct({formData, navigate}: {formData: IProductForm, navigate: Function}) {
         await addProduct(formData);
         await this.setProducts();
-        navigate("/")
+        navigate('/')
     }
 
 }
