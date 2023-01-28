@@ -9,12 +9,12 @@ const Products = () => {
 
   useEffect(() => {
     productsState.setProducts();
-  });
+  },[]);
 
   return (
     <div className={styles.products}>
       {products.map((p) => {
-        return <Product product={p} />;
+        return <Product product={p} key={p.id} />;
       })}
     </div>
   );

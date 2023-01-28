@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IProduct } from '../../utils/types/types';
 import styles from './Product.module.scss';
-import BuyModal from '../../Portals/BuyModal/BuyModal';
 import modalState from '../../stores/modalStore';
 import { observer } from 'mobx-react';
 
@@ -12,7 +11,6 @@ type IProps = {
 
 const Product: React.FC<IProps> = ({ product }) => {
   const [show, setShow] = useState<boolean>(false);
-  const { open } = modalState;
   const navigate = useNavigate();
 
   return (
@@ -33,7 +31,6 @@ const Product: React.FC<IProps> = ({ product }) => {
         {show ? 'Hide Details' : 'Show Details'}
       </button>
       <span>{show && product.title}</span>
-      {open && <BuyModal />}
     </div>
   );
 };
