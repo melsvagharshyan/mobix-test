@@ -2,17 +2,20 @@ import { createPortal } from 'react-dom';
 import styles from './BuyModal.module.scss';
 import modalState from '../../stores/modalStore';
 import { observer } from 'mobx-react';
+import openSound from '../../assets/open.wav';
+import closeSound from '../../assets/close.wav';
 
 const BuyModal = () => {
-  const { id, open } = modalState;
+  const {  open } = modalState;
 
   const onYes = () => {
-    alert(id);
     modalState.setOpen({ val: false, id: null });
+    new Audio(openSound).play();
   };
 
   const onNo = () => {
     modalState.setOpen({ val: false, id: null });
+    new Audio(closeSound).play();
   };
 
   if (!open) return null;
