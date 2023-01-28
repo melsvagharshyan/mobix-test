@@ -1,36 +1,23 @@
-import {observer} from "mobx-react";
+import { observer } from 'mobx-react';
 import productsState from '../../stores/dataStore';
 import styles from './Products.module.scss';
-import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-
+import { useEffect } from 'react';
+import Product from '../Product/Product';
 
 const Products = () => {
-    const {products} = productsState;
-    const navigate = useNavigate();
+  const { products } = productsState;
 
+  useEffect(() => {
+    productsState.setProducts();
+  });
 
-    useEffect(() => {
-        productsState.setProducts();
-    })
-
-    return (
-        <div className={styles.products}>
-            {
-                products.map(p => {
-                    return (
-                        <div className={styles.product} key={p.id}>
-                            <p>{p.title}</p>
-                            <img src={p.image} alt="img"/>
-                            <button onClick={() => navigate(`/${p.id}`)}>
-                                Buy
-                            </button>
-                        </div>
-                    )
-                })
-            }
-        </div>
-    )
+  return (
+    <div className={styles.products}>
+      {products.map((p) => {
+        return <Product product={p} />;
+      })}
+    </div>
+  );
 };
 
 export default observer(Products);

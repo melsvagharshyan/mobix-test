@@ -1,0 +1,38 @@
+.buyModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+  max-height: 180px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  .yesButton {
+    border: none;
+    background: lawngreen;
+    color: white;
+    max-width: 80px;
+    width: 100%;
+    padding: 3px 0;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .noButton {
+    border: none;
+    background: red;
+    color: white;
+    max-width: 80px;
+    width: 100%;
+    padding: 3px 0;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+}

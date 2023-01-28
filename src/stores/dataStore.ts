@@ -1,47 +1,52 @@
-import {makeAutoObservable} from "mobx";
-import {fetchProducts, fetchSingleProduct, postProduct} from "../utils/api/api";
-import {IProduct} from "../utils/types/types";
-import {IProductForm} from "../components/AddProduct";
+import { makeAutoObservable } from 'mobx';
+import {
+  fetchProducts,
+  fetchSingleProduct,
+  postProduct,
+} from '../utils/api/api';
+import { IProduct } from '../utils/types/types';
 
 async function getProducts(): Promise<Array<IProduct>> {
-    const {data} = await fetchProducts();
-    return data;
+  const { data } = await fetchProducts();
+  return data;
 }
 
 async function getSingleProduct(id: string | undefined): Promise<IProduct> {
-    const {data} = await fetchSingleProduct(id);
-    return data;
+  const { data } = await fetchSingleProduct(id);
+  return data;
 }
 
-async function addProduct(formData: IProductForm) {
-    await postProduct(formData);
+async function addProduct(formData: Partial<IProduct>) {
+  await postProduct(formData);
 }
-
 
 class DataStore {
-    products: Array<IProduct> = [];
-    singleProduct: IProduct | null = null;
+  products: Array<IProduct> = [];
+  singleProduct: IProduct | null = null;
 
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-    constructor() {
-        makeAutoObservable(this);
-    }
+  async setProducts(): Promise<void> {
+    this.products = await getProducts();
+  }
 
+  async setSingleProduct(id: string | undefined): Promise<void> {
+    this.singleProduct = await getSingleProduct(id);
+  }
 
-    async setProducts(): Promise<void> {
-        this.products = await getProducts();
-    }
-
-    async setSingleProduct(id: string | undefined): Promise<void> {
-        this.singleProduct = await getSingleProduct(id)
-    }
-
-    async postNewProduct({formData, navigate}: { formData: IProductForm, navigate: Function }) {
-        await addProduct(formData);
-        await this.setProducts();
-        navigate('/')
-    }
-
+  async postNewProduct({
+    formData,
+    navigate,
+  }: {
+    formData: Partial<IProduct>;
+    navigate: Function;
+  }) {
+    await addProduct(formData);
+    await this.setProducts();
+    navigate('/');
+  }
 }
 
 
