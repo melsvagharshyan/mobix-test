@@ -1,12 +1,12 @@
+import { observer } from 'mobx-react';
 import { createPortal } from 'react-dom';
 import styles from './BuyModal.module.scss';
 import modalState from '../../stores/modalStore';
-import { observer } from 'mobx-react';
 import openSound from '../../assets/open.wav';
 import closeSound from '../../assets/close.wav';
 
 const BuyModal = () => {
-  const {  open } = modalState;
+  const { open } = modalState;
 
   const onYes = () => {
     modalState.setOpen({ val: false, id: null });
@@ -36,3 +36,5 @@ const BuyModal = () => {
 };
 
 export default observer(BuyModal);
+
+
